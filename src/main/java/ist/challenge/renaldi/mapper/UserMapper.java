@@ -5,7 +5,7 @@
 package ist.challenge.renaldi.mapper;
 
 import ist.challenge.renaldi.entity.User;
-import ist.challenge.renaldi.pojo.UserRegistration;
+import ist.challenge.renaldi.pojo.UserDataInput;
 import org.mapstruct.Mapper;
 
 /**
@@ -15,6 +15,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     
-    User mapRegistration(UserRegistration registration);
+    User mapRegistration(UserDataInput registration);
     
 }

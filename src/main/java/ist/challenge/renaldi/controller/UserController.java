@@ -5,7 +5,7 @@
 package ist.challenge.renaldi.controller;
 
 import ist.challenge.renaldi.mapper.UserMapper;
-import ist.challenge.renaldi.pojo.UserRegistration;
+import ist.challenge.renaldi.pojo.UserDataInput;
 import ist.challenge.renaldi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +28,7 @@ public class UserController {
     private UserMapper userMapper;
     
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@ModelAttribute UserRegistration newUser){
+    public ResponseEntity<String> registerUser(@ModelAttribute UserDataInput newUser){
         userService.registerUser(
                             userMapper.mapRegistration(newUser));
         return ResponseEntity.status(HttpStatus.CREATED)

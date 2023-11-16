@@ -11,7 +11,7 @@ import lombok.Data;
  * @author ryuuji
  */
 @Data
-public class UserRegistration {
+public class UserDataInput {
     
     private String username, password;
     
