@@ -8,6 +8,7 @@ import ist.challenge.renaldi.entity.User;
 import ist.challenge.renaldi.exception.user.UserAlreadyExistException;
 import ist.challenge.renaldi.exception.user.UserLoginException;
 import ist.challenge.renaldi.repository.UserRepository;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,10 @@ public class UserService {
         User user = repository.findByUsername(login.getUsername());
         if(!user.getPassword().contentEquals(login.getPassword()))
             throwInvalidLogin();
+    }
+    
+    public List<User> listAllUser(){
+        return repository.findAll();
     }
     
 }
