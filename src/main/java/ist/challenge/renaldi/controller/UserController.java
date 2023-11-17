@@ -30,9 +30,17 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@ModelAttribute UserDataInput newUser){
         userService.registerUser(
-                            userMapper.mapRegistration(newUser));
+                            userMapper.mapInput(newUser));
         return ResponseEntity.status(HttpStatus.CREATED)
                                     .body("OK");
+    }
+    
+    @PostMapping("/login")
+    public ResponseEntity<String> loginUser(@ModelAttribute UserDataInput newUser){
+        userService.loginUser(
+                            userMapper.mapInput(newUser));
+        return ResponseEntity.status(HttpStatus.OK)
+                                    .body("WELCOME");
     }
     
 }
