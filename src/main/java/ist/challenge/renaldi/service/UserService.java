@@ -7,6 +7,8 @@ package ist.challenge.renaldi.service;
 import ist.challenge.renaldi.entity.User;
 import ist.challenge.renaldi.exception.user.UserAlreadyExistException;
 import ist.challenge.renaldi.exception.user.UserLoginException;
+import ist.challenge.renaldi.exception.user.UserUpdatePasswordException;
+import ist.challenge.renaldi.mapper.UserMapper;
 import ist.challenge.renaldi.repository.UserRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +24,17 @@ public class UserService {
     @Autowired
     private UserRepository repository;
     
+    @Autowired
+    private UserMapper mapper;
+    
     public void registerUser(User newUser) throws UserAlreadyExistException{
         if(repository.existsByUsername(newUser.getUsername()))
-            throw UserAlreadyExistException.messageOnly("Username sudah terpakai");
+            throwUsernameExisting();
        repository.save(newUser);
+    }
+    
+    private void throwUsernameExisting(){
+            throw UserAlreadyExistException.messageOnly("Username sudah terpakai");
     }
     
     private void throwEmptyLogin(){
@@ -50,6 +59,17 @@ public class UserService {
     
     public List<User> listAllUser(){
         return repository.findAll();
+    }
+    
+    public void updatePassword(User inputUser) throws UserAlreadyExistException, UserUpdatePasswordException{
+        if(repository.existsByUsername(inputUser.getUsername()))
+            throwUsernameExisting();
+        User user = repository.findById(inputUser.getId())
+                                .get();
+        if(user.getPassword().contentEquals(inputUser.getPassword()))
+            throw UserUpdatePasswordException.messageOnly("Password tidak boleh sama dengan password sebelumnya");
+        mapper.updateExisting(inputUser, user);
+        repository.save(user);
     }
     
 }
