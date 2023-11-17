@@ -6,6 +6,7 @@ package ist.challenge.renaldi.mapper;
 
 import ist.challenge.renaldi.entity.User;
 import ist.challenge.renaldi.pojo.UserDataInput;
+import ist.challenge.renaldi.pojo.UserDataOutput;
 import org.mapstruct.Mapper;
 
 /**
@@ -16,5 +17,7 @@ import org.mapstruct.Mapper;
 public interface UserMapper {
     
     User mapInput(UserDataInput registration);
+    
+    UserDataOutput mapOutput(User user);
     
 }
