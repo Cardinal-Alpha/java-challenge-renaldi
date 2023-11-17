@@ -22,7 +22,7 @@ public class UserService {
     
     public void registerUser(User newUser){
         if(repository.existsByUsername(newUser.getUsername()))
-            throw UserAlreadyExistException.defaultException();
+            throw UserAlreadyExistException.messageOnly("Username sudah terpakai");
         repository.save(newUser);
     }
     

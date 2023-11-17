@@ -20,7 +20,7 @@ public class UserExceptionAdvice {
     @ExceptionHandler
     public ResponseEntity<String> handleDataException(UserAlreadyExistException ex){
         return ResponseEntity.status(HttpStatus.CONFLICT)
-                                .body("Username sudah terpakai");
+                                .body(ex.getMessage());
     }
     
 }

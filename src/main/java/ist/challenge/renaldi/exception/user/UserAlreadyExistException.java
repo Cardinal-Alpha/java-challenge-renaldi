@@ -10,21 +10,19 @@ package ist.challenge.renaldi.exception.user;
  */
 public class UserAlreadyExistException extends UserException{
     
-    public static UserAlreadyExistException defaultException(){
-        return new UserAlreadyExistException();
+    public static UserAlreadyExistException messageOnly(String message){
+        return new UserAlreadyExistException(message);
     }
     
-    public static UserAlreadyExistException withCause(Throwable cause){
-        return new UserAlreadyExistException(cause);
+    public static UserAlreadyExistException fullDetail(String message, Throwable cause){
+        return new UserAlreadyExistException(message, cause);
     }
-
-    private static final String MESSAGE="Username already exist";
     
-    protected UserAlreadyExistException() {
-        super(MESSAGE);
+    protected UserAlreadyExistException(String message){
+        super(message);
     }
 
-    protected UserAlreadyExistException(Throwable cause) {
-        super(MESSAGE, cause);
+    protected UserAlreadyExistException(String message, Throwable cause) {
+        super(message, cause);
     }
 }
