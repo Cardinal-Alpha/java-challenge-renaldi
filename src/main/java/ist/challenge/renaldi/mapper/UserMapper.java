@@ -15,6 +15,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     
-    User mapRegistration(UserDataInput registration);
+    User mapInput(UserDataInput registration);
     
 }
