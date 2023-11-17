@@ -13,3 +13,7 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    env_file:
+      - dbenv
+    ports:
+      - 8080:8080
