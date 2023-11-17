@@ -4,6 +4,7 @@
  */
 package ist.challenge.renaldi.controller;
 
+import ist.challenge.renaldi.entity.User;
 import ist.challenge.renaldi.mapper.UserMapper;
 import ist.challenge.renaldi.pojo.UserDataInput;
 import ist.challenge.renaldi.pojo.UserDataOutput;
@@ -15,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -52,6 +55,15 @@ public class UserController {
         return userService.listAllUser().stream()
                             .map(u -> userMapper.mapOutput(u))
                             .collect(Collectors.toList());
+    }
+    
+    @PutMapping("/user/update-password/{id}")
+    public ResponseEntity<String> updateUser(@PathVariable("id") long id, @ModelAttribute UserDataInput userUpdate){
+        User data = userMapper.mapInput(userUpdate);
+        data.setId(id);
+        userService.updatePassword(data);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                                    .body("UPDATED");
     }
     
 }

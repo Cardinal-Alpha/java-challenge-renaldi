@@ -6,6 +6,7 @@ package ist.challenge.renaldi.controller.advice;
 
 import ist.challenge.renaldi.exception.user.UserAlreadyExistException;
 import ist.challenge.renaldi.exception.user.UserLoginException;
+import ist.challenge.renaldi.exception.user.UserUpdatePasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -34,6 +35,12 @@ public class UserExceptionAdvice {
                                 .body(ex.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                 .body("Unexpected error occur");
+    }
+    
+    @ExceptionHandler
+    public ResponseEntity<String> handleUpdatePasswordException(UserUpdatePasswordException ex){
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                .body(ex.getMessage());
     }
     
 }
