@@ -7,3 +7,9 @@ services:
       - dbenv
     ports:
       - 5432:5432
+  
+  application:
+    image: istchallengerenaldi
+    build: 
+      context: .
+      dockerfile: Dockerfile
